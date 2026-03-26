@@ -1,3 +1,5 @@
+document.getElementById("loginBtn").addEventListener("click", login);
+
 function login() {
     const user = document.getElementById("username").value.trim();
     const pass = document.getElementById("password").value.trim();
@@ -7,8 +9,10 @@ function login() {
         return;
     }
 
-    // Замініть URL на свій Web App URL
-    fetch("https://script.google.com/macros/s/AKfycbwcpN5A7o4hbxuWYgy77K35utt5zm5YRW9DPXypMAbgw2oy65aAbpH75ls_cqeqVs6GCQ/exec", {
+    // Твій Web App URL
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbwcpN5A7o4hbxuWYgy77K35utt5zm5YRW9DPXypMAbgw2oy65aAbpH75ls_cqeqVs6GCQ/exec";
+
+    fetch(webAppUrl, {
         method: "POST",
         body: JSON.stringify({ username: user, password: pass }),
         headers: { "Content-Type": "application/json" }
@@ -20,5 +24,6 @@ function login() {
     })
     .catch(error => {
         console.error('Помилка при записі в Google Sheets:', error);
+        alert("Помилка з’єднання. Спробуй пізніше.");
     });
 }
