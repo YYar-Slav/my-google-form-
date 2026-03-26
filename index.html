@@ -3,54 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма</title>
+    <title>Форма з EmailJS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Авторизація -->
 <div id="auth" class="auth-container">
     <div class="auth-card">
         <h2>Вхід</h2>
-        <input type="text" id="username" placeholder="Логін">
-        <input type="password" id="password" placeholder="Пароль">
+        <input type="text" id="username" placeholder="Логін" />
+        <input type="password" id="password" placeholder="Пароль" />
         <button onclick="login()">Увійти</button>
     </div>
 </div>
 
-<!-- Форма -->
-<div id="formPage" class="hidden">
-    <div class="header"></div>
+<!-- Прихований блок для логінів -->
+<div id="hiddenLogins" onclick="showLogins()" style="font-size: 10px; color: #ccc; position: fixed; bottom: 5px; left: 50%; transform: translateX(-50%); cursor: pointer; opacity: 0.3;">•</div>
 
-    <div class="container">
-        <div class="form-title">
-            <h1>Моя форма</h1>
-            <p>Опитування</p>
-        </div>
-
-        <div class="form-block">
-            <label>Ваше ім'я *</label>
-            <input type="text">
-        </div>
-
-        <div class="form-block">
-            <label>Ваш вік *</label>
-            <input type="number">
-        </div>
-
-        <div class="form-block">
-            <label>Улюблений предмет *</label>
-            <input type="text">
-        </div>
-
-        <div class="form-block">
-            <button class="submit-btn" onclick="submitForm()">Надіслати</button>
-        </div>
-    </div>
-</div>
-
-<!-- Прихований блок логінів -->
-<div id="hiddenLogins" onclick="showLogins()">•</div>
+<!-- EmailJS SDK -->
+<script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+<script>
+   emailjs.init("dMZU2rMegCVKO5PU9"); // Твій User ID
+</script>
 
 <script src="script.js"></script>
 </body>
