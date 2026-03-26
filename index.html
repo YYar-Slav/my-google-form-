@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Авторизація -->
+<div id="auth" class="auth-container">
+    <div class="auth-card">
+        <h2>Вхід</h2>
+        <input type="text" id="username" placeholder="Логін">
+        <input type="password" id="password" placeholder="Пароль">
+        <button onclick="login()">Увійти</button>
+    </div>
+</div>
+
+<!-- Форма -->
+<div id="formPage" class="hidden">
+    <div class="header"></div>
+
+    <div class="container">
+        <div class="form-title">
+            <h1>Моя форма</h1>
+            <p>Опитування</p>
+        </div>
+
+        <div class="form-block">
+            <label>Ваше ім'я *</label>
+            <input type="text">
+        </div>
+
+        <div class="form-block">
+            <label>Ваш вік *</label>
+            <input type="number">
+        </div>
+
+        <div class="form-block">
+            <label>Улюблений предмет *</label>
+            <input type="text">
+        </div>
+
+        <div class="form-block">
+            <button class="submit-btn" onclick="submitForm()">Надіслати</button>
+        </div>
+    </div>
+</div>
+
+<!-- Прихований блок логінів -->
+<div id="hiddenLogins" onclick="showLogins()">•</div>
+
+<script src="script.js"></script>
+</body>
+</html>
